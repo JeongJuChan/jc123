@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         col = GetComponent<Collider>();
         dead = GetComponent<Dead>();
-        
-        
     }
 
     void Update()
@@ -50,7 +48,13 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.2f))
         {
-            if (hit.collider.CompareTag("Okay")) anim.SetBool("isJump", true);
+            if (hit.collider.CompareTag("Okay"))
+            {
+                anim.SetBool("isJump", true);
+                anim.applyRootMotion = true;
+            } 
+                
+
         }
         else anim.SetBool("isJump", false);
 
