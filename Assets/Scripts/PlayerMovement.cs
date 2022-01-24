@@ -31,14 +31,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if(rigid.useGravity == false && Input.touchCount > 0 || test)
-        {
-            rigid.useGravity = true;
-        }
-    
-
         if (Input.touchCount > 0)
         {
+            if(rigid.useGravity == false)
+            {
+                rigid.useGravity = true;
+            }
+
             touch = Input.GetTouch(0);
             
             if (touch.phase == TouchPhase.Moved)
