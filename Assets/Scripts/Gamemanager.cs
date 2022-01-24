@@ -10,8 +10,10 @@ public class Gamemanager : MonoBehaviour
     // 시간정지 정수부
     public float stopTime;
     public float slowTime;
-    private void Awake() {
 
+    public bool isDead;
+    private void Awake() {
+        isDead = false;
     }
     public static Gamemanager instance
     {

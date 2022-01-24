@@ -13,25 +13,34 @@ public class PlayerMovement : MonoBehaviour
 
     Collider col;
 
-    
+    Dead dead;
 
-
+    public bool test;
 
     void Start()
     {
         speed = 0.01f;    
+        test = false;
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         col = GetComponent<Collider>();
+        dead = GetComponent<Dead>();
+        
         
     }
 
     void Update()
     {
+        if(rigid.useGravity == false && Input.touchCount > 0 || test)
+        {
+            rigid.useGravity = true;
+        }
+    
+
         if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
-
+            
             if (touch.phase == TouchPhase.Moved)
             {
                 transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * speed,
