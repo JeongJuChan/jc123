@@ -11,7 +11,6 @@ public class Gamemanager : MonoBehaviour
     // 시간정지 정수부
     public float stopTime;
     public float slowTime;
-
     public bool isDead;
 
     public Animator playerAnim;
@@ -65,11 +64,41 @@ public class Gamemanager : MonoBehaviour
     public void Win()
     {
         playerAnim.SetBool("win", true);
+
+        //버튼 활성화 리스타트 가능하게 함
+
+        UImanager.instance.button.enabled = true;
+        UImanager.instance.RestartButton();
+
+
         // 그 외 UI 추후에는 에너미 우는 것 등
     }
 
     public void Combo() 
     {
         if (!playerAnim.GetBool("isJump")) count++;
+
+        // 콤보가 보이고 콤보가 2초가 지나면 저절로 사라지게함
+        if(count > 0)
+        {
+            UImanager.instance.comboText.enabled = true;
+        }else
+        {
+            UImanager.instance.comboText.enabled = false;
+        }
+        
+        if(count > 0 && UImanager.instance.comboText.enabled == true)
+        {
+            WaitComboText();
+            UImanager.instance.comboText.enabled = false;
+
+        }
+
+        UImanager.instance.comboText.text = count.ToString();
+    }
+
+    IEnumerator WaitComboText()
+    {
+        yield return new WaitForSeconds(2f);
     }
 }

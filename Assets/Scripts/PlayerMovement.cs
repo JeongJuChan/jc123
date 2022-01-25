@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,25 +19,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        speed = 0.008f;    
+        speed = 0.01f;
         test = false;
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         col = GetComponent<Collider>();
         dead = GetComponent<Dead>();
+        
+        
     }
 
     void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0) 
         {
             if(rigid.useGravity == false)
             {
                 rigid.useGravity = true;
-            }
-            if (!anim.applyRootMotion)
-            {
-                anim.applyRootMotion = true;
+                UImanager.instance.offText();
             }
 
             touch = Input.GetTouch(0);
@@ -50,21 +49,20 @@ public class PlayerMovement : MonoBehaviour
         }
         
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.2f))
         {
-            Cube cube = hit.collider.GetComponent<Cube>();
-            if (hit.collider.CompareTag("Okay") && cube.currentColor != cube.pivot.randomPivot)
-            {
-                anim.SetBool("isJump", true);
-                Gamemanager.instance.count = 0;
-            }
+            if (hit.collider.CompareTag("Okay")) anim.SetBool("isJump", true);
         }
         else anim.SetBool("isJump", false);
-     
 
     }
 
+    public void StartPoint()
+    {
+        this.gameObject.transform.position = new Vector3 (2.01f, 52.17f, 0f);
+    }
 
     
+
 
 }
