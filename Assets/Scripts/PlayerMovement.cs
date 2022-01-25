@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        speed = 0.01f;    
+        speed = 0.008f;    
         test = false;
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();

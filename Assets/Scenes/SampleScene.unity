@@ -634,6 +634,14 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.09797118
       objectReference: {fileID: 0}
+    - target: {fileID: 1334063849, guid: bbfacc385264b75488ed27c92c934fda, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1334063849, guid: bbfacc385264b75488ed27c92c934fda, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5459546547197472286, guid: bbfacc385264b75488ed27c92c934fda,
         type: 3}
       propertyPath: exitWallTrans
@@ -757,6 +765,7 @@ GameObject:
   - component: {fileID: 494167631}
   - component: {fileID: 494167630}
   - component: {fileID: 494167629}
+  - component: {fileID: 494167633}
   m_Layer: 0
   m_Name: SideWall2
   m_TagString: Untagged
@@ -838,6 +847,22 @@ Transform:
   m_Father: {fileID: 981472705}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &494167633
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494167628}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &513641945
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +875,7 @@ GameObject:
   - component: {fileID: 513641948}
   - component: {fileID: 513641947}
   - component: {fileID: 513641946}
+  - component: {fileID: 513641950}
   m_Layer: 0
   m_Name: SideWall1
   m_TagString: Untagged
@@ -925,12 +951,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513641945}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.29916096, y: 61.512573, z: 7.129313}
-  m_LocalScale: {x: 5, y: 100, z: 1}
+  m_LocalPosition: {x: -1.04, y: 61.512573, z: 7.129313}
+  m_LocalScale: {x: 5, y: 100, z: 3.6298}
   m_Children: []
   m_Father: {fileID: 981472705}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &513641950
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513641945}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 2
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!65 &525139594 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 525139594, guid: bbfacc385264b75488ed27c92c934fda,
@@ -3792,7 +3834,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 25
+  m_CameraDistance: 20
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
