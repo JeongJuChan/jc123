@@ -35,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 rigid.useGravity = true;
             }
+            if (!anim.applyRootMotion)
+            {
+                anim.applyRootMotion = true;
+            }
 
             touch = Input.GetTouch(0);
             
@@ -46,22 +50,19 @@ public class PlayerMovement : MonoBehaviour
         }
         
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.2f))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f))
         {
-            if (hit.collider.CompareTag("Okay"))
+            Cube cube = hit.collider.GetComponent<Cube>();
+            if (hit.collider.CompareTag("Okay") && cube.currentColor != cube.pivot.randomPivot)
             {
                 anim.SetBool("isJump", true);
-                anim.applyRootMotion = true;
-            } 
-                
-
+                Gamemanager.instance.count = 0;
+            }
         }
         else anim.SetBool("isJump", false);
+     
 
-        
     }
-
-    
 
 
     

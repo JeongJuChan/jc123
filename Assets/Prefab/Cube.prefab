@@ -109,7 +109,9 @@ MonoBehaviour:
   m_goPrefab: {fileID: 1337579356702555892, guid: 73dbc4ae1febb7f4ea7a92e2aba81438,
     type: 3}
   m_force: 60
-  m_offset: {x: 0, y: 0.25, z: 0}
   m_particle: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  m_offset: {x: 0, y: 0.25, z: 0}
   currentColor: 0
+  pivot: {fileID: 0}
+  meshRenderer: {fileID: 0}
+  cubeaudio: {fileID: 0}

@@ -14,8 +14,7 @@ public class FinalZone : MonoBehaviour
         {
             finalMove.enabled = true;
             playerMovement.enabled = false;
-            playerAnim.SetBool("isJump", false);
-            playerAnim.SetBool("final", true);
+            
         }
     }
 }

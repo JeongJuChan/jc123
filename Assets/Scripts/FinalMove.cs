@@ -6,6 +6,12 @@ public class FinalMove : MonoBehaviour
 {
     AudioSource audioSource;
     Animator anim;
+    public Collider punchCollider;
+
+    public Transform exitWallTrans;
+
+    Touch touch;
+
 
     void Start()
     {
@@ -23,12 +29,37 @@ public class FinalMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Vector3.Distance(transform.position, exitWallTrans.position) > 4f)
         {
-            float hitRandom = Random.Range(0f, 1f);
-            anim.SetFloat("fist", hitRandom);
-            anim.SetTrigger("punch");
+            anim.SetTrigger("run");
+        }
+        else
+        {
+            anim.SetBool("final", true);
+            Gamemanager.instance.cam.m_CameraDistance = 15f;
+        }
+            
+        
+        if (Input.touchCount > 0)
+        {
+            touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                float hitRandom = Random.Range(0f, 1f);
+                anim.SetFloat("fist", hitRandom);
+                anim.SetTrigger("punch");
+                StartCoroutine(Punch());
+            }
         }
     }
+
+    IEnumerator Punch()
+    {
+        anim.SetTrigger("punch");
+        punchCollider.enabled = true;
+        yield return new WaitForSeconds(0.25f);
+        punchCollider.enabled = false;
+    }
+    
     
 }

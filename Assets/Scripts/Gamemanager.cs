@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Gamemanager : MonoBehaviour
 {
@@ -12,9 +13,19 @@ public class Gamemanager : MonoBehaviour
     public float slowTime;
 
     public bool isDead;
-    private void Awake() {
+
+    public Animator playerAnim;
+
+    public CinemachineFramingTransposer cam;
+
+    public int count;
+
+    private void Awake() 
+    {
         isDead = false;
+        cam = FindObjectOfType<CinemachineFramingTransposer>();
     }
+
     public static Gamemanager instance
     {
         get
@@ -49,6 +60,16 @@ public class Gamemanager : MonoBehaviour
         yield return new WaitForSecondsRealtime(slowTime);
         Time.timeScale = 1f;
         stopping = false;
+    }
 
+    public void Win()
+    {
+        playerAnim.SetBool("win", true);
+        // 그 외 UI 추후에는 에너미 우는 것 등
+    }
+
+    public void Combo() 
+    {
+        if (!playerAnim.GetBool("isJump")) count++;
     }
 }

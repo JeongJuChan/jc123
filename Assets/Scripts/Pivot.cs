@@ -6,11 +6,12 @@ public class Pivot : MonoBehaviour
 {
     public float randomPivot;
 
-    // public MeshRenderer matPivot;
-
     public SkinnedMeshRenderer matPivot;
 
-    private void Start() {
+    public Collider punchCol;
+
+    private void Start() 
+    {
         RandomColor();
         matPivot = GetComponent<SkinnedMeshRenderer>();
         Debug.Log(randomPivot);
@@ -19,7 +20,6 @@ public class Pivot : MonoBehaviour
     public void RandomColor()
     {
         randomPivot = Random.Range(0,3);
-
 
         if(randomPivot == 0)
         {
@@ -33,23 +33,14 @@ public class Pivot : MonoBehaviour
         {
             matPivot.material.color = Color.green;
         }
+    }
 
-        // switch (randomPivot)
-        // {
-        //     case 0:
-        //     matPivot.material.color = Color.red;
-        //     break;
-
-        //     case 1:
-        //     matPivot.material.color = Color.blue;
-        //     break;
-
-        //     case 2:
-        //     matPivot.material.color = Color.green;
-        //     break;
-
-        //     default:
-        //     break;
-        // }
+    private void OnTriggerEnter(Collider other) 
+    {
+        ExitWall exit = other.GetComponent<ExitWall>();
+        if (exit != null)
+        {
+            exit.stack++;
+        }
     }
 }
