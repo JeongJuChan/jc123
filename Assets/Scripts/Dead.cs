@@ -15,6 +15,7 @@ public class Dead : MonoBehaviour
     void playerDead()
     {
         anim.SetBool("isDead",true);
+        UImanager.instance.restartButton.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other) 

@@ -17,14 +17,9 @@ public class FinalMove : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
+        anim.applyRootMotion = true;
     }
 
-    public void Strike()
-    {
-        AudioClip audio = (AudioClip)Resources.Load("hit01");
-        audioSource.clip = (AudioClip)audio;
-        audioSource.Play();
-    }
 
 
     void Update()
@@ -45,21 +40,28 @@ public class FinalMove : MonoBehaviour
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
+                // if (anim.GetBool("punch")) return;
+                anim.SetTrigger("punch");
                 float hitRandom = Random.Range(0f, 1f);
                 anim.SetFloat("fist", hitRandom);
-                anim.SetTrigger("punch");
-                StartCoroutine(Punch());
             }
         }
     }
 
     IEnumerator Punch()
     {
-        anim.SetTrigger("punch");
         punchCollider.enabled = true;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
         punchCollider.enabled = false;
     }
     
+    public void Strike()
+    {
+        StartCoroutine(Punch());
+
+        AudioClip audio = (AudioClip)Resources.Load("hit01");
+        audioSource.clip = (AudioClip)audio;
+        audioSource.Play();
+    }
     
 }

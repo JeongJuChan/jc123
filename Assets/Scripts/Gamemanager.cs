@@ -17,12 +17,17 @@ public class Gamemanager : MonoBehaviour
 
     public CinemachineFramingTransposer cam;
 
-    public int count;
+    public int combo;
+    public int maxCombo;
+
+    int coin;
+
 
     private void Awake() 
     {
         isDead = false;
         cam = FindObjectOfType<CinemachineFramingTransposer>();
+
     }
 
     public static Gamemanager instance
@@ -65,40 +70,36 @@ public class Gamemanager : MonoBehaviour
     {
         playerAnim.SetBool("win", true);
 
-        //버튼 활성화 리스타트 가능하게 함
-
-        UImanager.instance.button.enabled = true;
-        UImanager.instance.RestartButton();
-
-
+        //버튼 활성화 다음 씬 가능하게 함
+        
+        UImanager.instance.nextButton.SetActive(true);
         // 그 외 UI 추후에는 에너미 우는 것 등
     }
 
     public void Combo() 
     {
-        if (!playerAnim.GetBool("isJump")) count++;
+        if (!playerAnim.GetBool("isJump"))
+        {
+            combo++;
+            if (combo > maxCombo) maxCombo = combo;
 
-        // 콤보가 보이고 콤보가 2초가 지나면 저절로 사라지게함
-        if(count > 0)
-        {
-            UImanager.instance.comboText.enabled = true;
-        }else
-        {
-            UImanager.instance.comboText.enabled = false;
+            UImanager.instance.ComboUI(combo);
+
+            GetCoin();
         }
-        
-        if(count > 0 && UImanager.instance.comboText.enabled == true)
-        {
-            WaitComboText();
-            UImanager.instance.comboText.enabled = false;
-
-        }
-
-        UImanager.instance.comboText.text = count.ToString();
     }
-
-    IEnumerator WaitComboText()
+    
+    void GetCoin()
     {
-        yield return new WaitForSeconds(2f);
+        coin += combo;
+        UImanager.instance.CoinUI(coin);
     }
+
+    public void GetCoin(int stack)
+    {
+        coin += maxCombo * stack;
+        UImanager.instance.CoinUI(coin);
+    }
+
+    
 }

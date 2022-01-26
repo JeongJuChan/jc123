@@ -12,8 +12,4 @@ public class Follow : MonoBehaviour
         cam.Follow = transform;
     }
 
-    void Update()
-    {
-        
-    }
 }

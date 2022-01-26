@@ -12,8 +12,9 @@ public class ExitWall : Explosion
     {
         if (stack == limit)
         {
-            this.Explosions();
             Gamemanager.instance.Win();
+            Gamemanager.instance.GetCoin(stack);
+            this.Explosions();
         }
     }
 

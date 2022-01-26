@@ -11,11 +11,15 @@ public class UImanager : MonoBehaviour
     private static UImanager m_UIinstance;
 
     
-    public  Text slidText;
-    public  Text comboText;
-    public Button button;
+    public Text slidText;
+    public Text comboText;
+    public Text CoinText;
+    public GameObject nextButton;
+    public GameObject restartButton;
 
     public PlayerMovement playerMovement;
+
+    int activeSceneIndex;
 
     public static UImanager instance
     {
@@ -29,25 +33,43 @@ public class UImanager : MonoBehaviour
         }
     }
 
+    private void Start() {
+        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
     public void offText()
     {
         slidText.enabled = false;
-
     }
 
     public void NextButton()
     {
-        playerMovement.StartPoint();
-        slidText.enabled = true;
+        SceneManager.LoadScene(activeSceneIndex + 1);
+        nextButton.SetActive(false);
     }
 
     public void RestartButton()
     {
-
-       SceneManager.LoadScene(0);
-
+       SceneManager.LoadScene(activeSceneIndex);
+       restartButton.SetActive(false);
     }
 
+    public void ComboUI(int count)
+    {
+        comboText.text = "Combo " + count.ToString();
+        StartCoroutine(WaitComboText());
+    }
+    
+    IEnumerator WaitComboText()
+    {
+        comboText.enabled = true;
+        yield return new WaitForSeconds(1f);
+        UImanager.instance.comboText.enabled = false;
+    }
 
+    public void CoinUI(int coin)
+    {
+        CoinText.text = "X " + coin.ToString();
+    }
 
 }

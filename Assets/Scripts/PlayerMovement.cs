@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         col = GetComponent<Collider>();
         dead = GetComponent<Dead>();
-        
-        
     }
 
     void Update()
@@ -49,20 +47,15 @@ public class PlayerMovement : MonoBehaviour
         }
         
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.2f))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f))
         {
-            if (hit.collider.CompareTag("Okay")) anim.SetBool("isJump", true);
+            Cube cube = hit.collider.GetComponent<Cube>();
+            if (hit.collider.CompareTag("Okay") && cube.currentColor != cube.pivot.randomPivot)
+            {
+                Gamemanager.instance.combo = 0;
+                anim.SetBool("isJump", true);
+            }
         }
         else anim.SetBool("isJump", false);
-
     }
-
-    public void StartPoint()
-    {
-        this.gameObject.transform.position = new Vector3 (2.01f, 52.17f, 0f);
-    }
-
-    
-
-
 }
