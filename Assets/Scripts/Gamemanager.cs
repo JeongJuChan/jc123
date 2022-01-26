@@ -73,6 +73,8 @@ public class Gamemanager : MonoBehaviour
         //버튼 활성화 다음 씬 가능하게 함
         
         UImanager.instance.nextButton.SetActive(true);
+        UImanager.instance.restartButton.SetActive(true);
+
         // 그 외 UI 추후에는 에너미 우는 것 등
     }
 
