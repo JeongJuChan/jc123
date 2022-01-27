@@ -39,6 +39,7 @@ public class Gamemanager : MonoBehaviour
     private void Awake() 
     {   
         cam = FindObjectOfType<CinemachineFramingTransposer>();
+        UImanager.instance.TimerText.text = TimeON.ToString();
         GameLoad();
     }
     
