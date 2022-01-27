@@ -17,9 +17,10 @@ public class UImanager : MonoBehaviour
     public GameObject nextButton;
     public GameObject restartButton;
 
-    public PlayerMovement playerMovement;
+    public Button playButton;
+    public Button pauseButton;
 
-    int activeSceneIndex;
+    public PlayerMovement playerMovement;
 
     public static UImanager instance
     {
@@ -32,11 +33,11 @@ public class UImanager : MonoBehaviour
             return m_UIinstance;
         }
     }
-
-    private void Start() {
-        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+    private void Awake() {
+        DontDestroyOnLoad(this.gameObject);
     }
 
+    
     public void offText()
     {
         slidText.enabled = false;
@@ -44,13 +45,13 @@ public class UImanager : MonoBehaviour
 
     public void NextButton()
     {
-        SceneManager.LoadScene(activeSceneIndex + 1);
+        SceneManager.LoadScene(Gamemanager.instance.activeSceneIndex + 1);
         nextButton.SetActive(false);
     }
 
     public void RestartButton()
     {
-       SceneManager.LoadScene(activeSceneIndex);
+       SceneManager.LoadScene(Gamemanager.instance.activeSceneIndex);
        restartButton.SetActive(false);
     }
 
@@ -58,6 +59,8 @@ public class UImanager : MonoBehaviour
     {
         comboText.text = "Combo " + count.ToString();
         StartCoroutine(WaitComboText());
+
+        
     }
     
     IEnumerator WaitComboText()
@@ -71,5 +74,27 @@ public class UImanager : MonoBehaviour
     {
         CoinText.text = "X " + coin.ToString();
     }
+
+    public void PauseButton()
+    {
+        pauseButton.gameObject.SetActive(false);
+        playButton.gameObject.SetActive(true);
+
+        Time.timeScale = 0f;
+
+    }
+    public void PlayButton()
+    {
+        pauseButton.gameObject.SetActive(true);
+        playButton.gameObject.SetActive(false);
+
+        Time.timeScale = 1f;
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    
 
 }

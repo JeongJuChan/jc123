@@ -6,14 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-<<<<<<< Updated upstream
-    path: Assets/Scenes/scecond.unity
-=======
-<<<<<<< HEAD
-    path: Assets/Scenes/SampleScene 3.unity
-=======
-    path: Assets/Scenes/scecond.unity
->>>>>>> 486ff49aec5b3fce23b2782ac93b3c64a26fd51a
->>>>>>> Stashed changes
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/SampleScene 1.unity
+    guid: 4bfd7739884160549abedc2c5098f34f
+  - enabled: 1
+    path: Assets/Scenes/SampleScene 2.unity
     guid: beb3ddbc02b9857448568ae874e31d1c
   m_configObjects: {}

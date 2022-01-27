@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class Gamemanager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class Gamemanager : MonoBehaviour
     public int maxCombo;
 
     int coin;
-
+    public int activeSceneIndex;
 
     private void Awake() 
     {
@@ -29,6 +30,11 @@ public class Gamemanager : MonoBehaviour
         cam = FindObjectOfType<CinemachineFramingTransposer>();
 
     }
+
+    private void Start() {
+        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
 
     public static Gamemanager instance
     {
@@ -86,6 +92,7 @@ public class Gamemanager : MonoBehaviour
             if (combo > maxCombo) maxCombo = combo;
 
             UImanager.instance.ComboUI(combo);
+            
 
             GetCoin();
         }
