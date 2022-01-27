@@ -14,7 +14,7 @@ public class UImanager : MonoBehaviour
     public Text comboText;
     public Text CoinText;
     public Text TimerText;
-    float TimeON;
+    float TimeON = 15f;
     public GameObject restartButton;
     public GameObject nextButton;
     
@@ -107,7 +107,7 @@ public class UImanager : MonoBehaviour
 
     public void Timer()
     {
-        TimeON = Time.deltaTime;
+        TimeON -= Time.deltaTime;
         TimerText.text = string.Format("{0:N2}", TimeON);
     }
     

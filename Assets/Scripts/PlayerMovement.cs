@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.touchCount > 0) 
         {
             touch = Input.GetTouch(0);
