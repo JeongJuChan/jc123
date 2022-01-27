@@ -12,7 +12,6 @@ public class Gamemanager : MonoBehaviour
     // 시간정지 정수부
     public float stopTime;
     public float slowTime;
-    public bool isDead;
 
     public Animator playerAnim;
 
@@ -23,18 +22,6 @@ public class Gamemanager : MonoBehaviour
 
     int coin;
     public int activeSceneIndex;
-
-    private void Awake() 
-    {
-        isDead = false;
-        cam = FindObjectOfType<CinemachineFramingTransposer>();
-
-    }
-
-    private void Start() {
-        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
-    }
-
 
     public static Gamemanager instance
     {
@@ -48,6 +35,18 @@ public class Gamemanager : MonoBehaviour
         }
         
     }
+
+    private void Awake() 
+    {   
+        cam = FindObjectOfType<CinemachineFramingTransposer>();
+        GameLoad();
+    }
+    
+    private void Start() 
+    {
+        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
 
 
     public void TimeStop()
@@ -76,12 +75,10 @@ public class Gamemanager : MonoBehaviour
     {
         playerAnim.SetBool("win", true);
 
-        //버튼 활성화 다음 씬 가능하게 함
-        
         UImanager.instance.nextButton.SetActive(true);
         UImanager.instance.restartButton.SetActive(true);
 
-        // 그 외 UI 추후에는 에너미 우는 것 등
+        GameSave();
     }
 
     public void Combo() 
@@ -110,5 +107,32 @@ public class Gamemanager : MonoBehaviour
         UImanager.instance.CoinUI(coin);
     }
 
-    
+    public void SceneLoadManager(int plus)
+    {
+        SceneManager.LoadScene(activeSceneIndex + plus);
+    }
+
+    public void GameSave()
+    {
+        PlayerPrefs.SetInt("ClearScene", activeSceneIndex);
+        PlayerPrefs.SetInt("Coin", coin);
+        PlayerPrefs.Save();
+    }
+
+    public void GameLoad()
+    {
+        if (!PlayerPrefs.HasKey("ClearScene")) return;
+        
+        int index = PlayerPrefs.GetInt("ClearScene");
+        int money = PlayerPrefs.GetInt("Coin");
+        coin = money;
+        UImanager.instance.CoinUI(coin);
+        
+        if (index > activeSceneIndex) SceneManager.LoadScene(index + 1);
+        
+
+        
+        
+    }
+
 }

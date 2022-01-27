@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,19 +32,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.touchCount > 0) 
         {
-            if(rigid.useGravity == false)
-            {
-                rigid.useGravity = true;
-                UImanager.instance.offText();
-            }
-
             touch = Input.GetTouch(0);
             
-            if (touch.phase == TouchPhase.Moved)
+            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
             {
-                transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * speed,
-                transform.position.y, transform.position.z);
+                if(rigid.useGravity == false)
+                {
+                    rigid.useGravity = true;
+                    UImanager.instance.offText();
+                }
+                
+                if (touch.phase == TouchPhase.Moved)
+                {
+                    transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * speed,
+                    transform.position.y, transform.position.z);
+                }
             }
+                
         }
         
         RaycastHit hit;

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -14,13 +13,11 @@ public class UImanager : MonoBehaviour
     public Text slidText;
     public Text comboText;
     public Text CoinText;
-    public GameObject nextButton;
     public GameObject restartButton;
-
-    public Button playButton;
+    public GameObject nextButton;
+    
     public Button pauseButton;
-
-    public PlayerMovement playerMovement;
+    public GameObject StopPanel;
 
     public static UImanager instance
     {
@@ -34,7 +31,12 @@ public class UImanager : MonoBehaviour
         }
     }
     private void Awake() {
-        DontDestroyOnLoad(this.gameObject);
+        UImanager[] uiManager = FindObjectsOfType<UImanager>();
+        if (uiManager.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
     }
 
     
@@ -43,24 +45,28 @@ public class UImanager : MonoBehaviour
         slidText.enabled = false;
     }
 
-    public void NextButton()
-    {
-        SceneManager.LoadScene(Gamemanager.instance.activeSceneIndex + 1);
-        nextButton.SetActive(false);
-    }
-
     public void RestartButton()
     {
-       SceneManager.LoadScene(Gamemanager.instance.activeSceneIndex);
+       Gamemanager.instance.SceneLoadManager(0);
+       Time.timeScale = 1f;
+       slidText.enabled = true;
+       nextButton.SetActive(false);
        restartButton.SetActive(false);
+       StopPanel.SetActive(false);
+    }
+
+    public void NextButton()
+    {
+        Gamemanager.instance.SceneLoadManager(1);
+        slidText.enabled = true;
+        nextButton.SetActive(false);
+        restartButton.SetActive(false);
     }
 
     public void ComboUI(int count)
     {
         comboText.text = "Combo " + count.ToString();
         StartCoroutine(WaitComboText());
-
-        
     }
     
     IEnumerator WaitComboText()
@@ -72,13 +78,13 @@ public class UImanager : MonoBehaviour
 
     public void CoinUI(int coin)
     {
-        CoinText.text = "X " + coin.ToString();
+        CoinText.text = "X" + coin.ToString();
     }
 
     public void PauseButton()
     {
         pauseButton.gameObject.SetActive(false);
-        playButton.gameObject.SetActive(true);
+        StopPanel.SetActive(true);
 
         Time.timeScale = 0f;
 
@@ -86,7 +92,7 @@ public class UImanager : MonoBehaviour
     public void PlayButton()
     {
         pauseButton.gameObject.SetActive(true);
-        playButton.gameObject.SetActive(false);
+        StopPanel.SetActive(false);
 
         Time.timeScale = 1f;
     }
@@ -94,6 +100,8 @@ public class UImanager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    
 
     
 

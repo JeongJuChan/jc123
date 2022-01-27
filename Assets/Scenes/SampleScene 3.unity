@@ -637,6 +637,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   combo: 0
   maxCombo: 0
+  activeSceneIndex: 0
 --- !u!4 &358162897
 Transform:
   m_ObjectHideFlags: 0
