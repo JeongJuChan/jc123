@@ -118,6 +118,8 @@ public class UImanager : MonoBehaviour
         else 
         {
             dead.playerDead();
+            restartButton.SetActive(true);
+            nextButton.SetActive(true);
         }
     }
     
