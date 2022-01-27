@@ -19,7 +19,7 @@ public class Gamemanager : MonoBehaviour
 
     public int combo;
     public int maxCombo;
-
+    public float TimeON;
     public int coin;
     public int activeSceneIndex;
 

@@ -14,12 +14,14 @@ public class UImanager : MonoBehaviour
     public Text comboText;
     public Text CoinText;
     public Text TimerText;
-    float TimeON = 15f;
+ 
     public GameObject restartButton;
     public GameObject nextButton;
     
     public Button pauseButton;
     public GameObject StopPanel;
+    Dead dead;
+    Gamemanager gamemanager;
 
     public static UImanager instance
     {
@@ -34,6 +36,8 @@ public class UImanager : MonoBehaviour
     }
     private void Awake() {
         UImanager[] uiManager = FindObjectsOfType<UImanager>();
+        dead = GetComponent<Dead>();
+        gamemanager = GetComponent<Gamemanager>();
         if (uiManager.Length == 1)
         {
             DontDestroyOnLoad(gameObject);
@@ -51,6 +55,7 @@ public class UImanager : MonoBehaviour
     {
        Gamemanager.instance.SceneLoadManager(0);
        Time.timeScale = 1f;
+       
        slidText.enabled = true;
        nextButton.SetActive(false);
        restartButton.SetActive(false);
@@ -107,8 +112,13 @@ public class UImanager : MonoBehaviour
 
     public void Timer()
     {
-        TimeON -= Time.deltaTime;
-        TimerText.text = string.Format("{0:N2}", TimeON);
+        if(gamemanager.TimeON >= 0.00f)
+        {
+            gamemanager.TimeON -= Time.deltaTime;
+            if(gamemanager.TimeON == 0) dead.playerDead();
+
+        }
+        TimerText.text = string.Format("{0:N2}", gamemanager.TimeON);
     }
     
 

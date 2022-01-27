@@ -12,7 +12,7 @@ public class Dead : MonoBehaviour
     }
 
 
-    void playerDead()
+    public void playerDead()
     {
         anim.SetBool("isDead",true);
         UImanager.instance.restartButton.SetActive(true);

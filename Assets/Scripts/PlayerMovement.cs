@@ -18,10 +18,13 @@ public class PlayerMovement : MonoBehaviour
 
     public bool test;
 
+    bool isStart;
+
     void Start()
     {
         speed = 0.01f;
         test = false;
+        isStart = false;
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         col = GetComponent<Collider>();
@@ -30,12 +33,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if(isStart == true)
+        {
+            UImanager.instance.Timer();
+        }
+
         
         if (Input.touchCount > 0) 
         {
             touch = Input.GetTouch(0);
-            UImanager.instance.Timer();
-            
+            isStart = true;
+
             if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
             {
                 if(rigid.useGravity == false)

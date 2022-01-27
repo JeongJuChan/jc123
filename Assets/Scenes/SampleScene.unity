@@ -598,7 +598,7 @@ MonoBehaviour:
   slidText: {fileID: 1903767550}
   comboText: {fileID: 798937594}
   CoinText: {fileID: 1672982171}
-  TimerText: {fileID: 0}
+  TimerText: {fileID: 1024676514}
   restartButton: {fileID: 1779085699}
   nextButton: {fileID: 171187447}
   pauseButton: {fileID: 1749093943}
@@ -870,6 +870,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   combo: 0
   maxCombo: 0
+  TimeON: 0
   coin: 0
   activeSceneIndex: 0
 --- !u!4 &358162897
@@ -2384,7 +2385,7 @@ GameObject:
   - component: {fileID: 1024676515}
   - component: {fileID: 1024676514}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
