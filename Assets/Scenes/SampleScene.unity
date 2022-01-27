@@ -870,7 +870,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   combo: 0
   maxCombo: 0
-  TimeON: 0
+  TimeON: 15
   coin: 0
   activeSceneIndex: 0
 --- !u!4 &358162897

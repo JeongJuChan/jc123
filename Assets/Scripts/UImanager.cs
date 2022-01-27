@@ -35,7 +35,7 @@ public class UImanager : MonoBehaviour
     }
     private void Awake() {
         UImanager[] uiManager = FindObjectsOfType<UImanager>();
-        dead = GetComponent<Dead>();
+        dead = FindObjectOfType<Dead>();
         if (uiManager.Length == 1)
         {
             DontDestroyOnLoad(gameObject);
@@ -110,13 +110,15 @@ public class UImanager : MonoBehaviour
 
     public void Timer()
     {
-        if(Gamemanager.instance.TimeON >= 0.00f)
+        if(Gamemanager.instance.TimeON > 0.00f)
         {
             Gamemanager.instance.TimeON -= Time.deltaTime;
-            if(Gamemanager.instance.TimeON == 0) dead.playerDead();
-
+            TimerText.text = string.Format("{0:N2}", Gamemanager.instance.TimeON);
         }
-        TimerText.text = string.Format("{0:N2}", Gamemanager.instance.TimeON);
+        else 
+        {
+            dead.playerDead();
+        }
     }
     
 
