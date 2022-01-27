@@ -13,6 +13,8 @@ public class UImanager : MonoBehaviour
     public Text slidText;
     public Text comboText;
     public Text CoinText;
+    public Text TimerText;
+    float TimeON;
     public GameObject restartButton;
     public GameObject nextButton;
     
@@ -103,6 +105,11 @@ public class UImanager : MonoBehaviour
         Application.Quit();
     }
 
+    public void Timer()
+    {
+        TimeON = Time.deltaTime;
+        TimerText.text = string.Format("{0:N2}", TimeON);
+    }
     
 
     

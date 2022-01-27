@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.touchCount > 0) 
         {
             touch = Input.GetTouch(0);
+            UImanager.instance.Timer();
             
             if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
             {
