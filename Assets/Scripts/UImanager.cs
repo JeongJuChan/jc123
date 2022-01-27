@@ -53,6 +53,7 @@ public class UImanager : MonoBehaviour
        nextButton.SetActive(false);
        restartButton.SetActive(false);
        StopPanel.SetActive(false);
+       pauseButton.gameObject.SetActive(true);
     }
 
     public void NextButton()
@@ -61,6 +62,7 @@ public class UImanager : MonoBehaviour
         slidText.enabled = true;
         nextButton.SetActive(false);
         restartButton.SetActive(false);
+        Gamemanager.instance.GameSave();
     }
 
     public void ComboUI(int count)

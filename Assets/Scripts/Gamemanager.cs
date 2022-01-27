@@ -20,7 +20,7 @@ public class Gamemanager : MonoBehaviour
     public int combo;
     public int maxCombo;
 
-    int coin;
+    public int coin;
     public int activeSceneIndex;
 
     public static Gamemanager instance
@@ -77,8 +77,6 @@ public class Gamemanager : MonoBehaviour
 
         UImanager.instance.nextButton.SetActive(true);
         UImanager.instance.restartButton.SetActive(true);
-
-        GameSave();
     }
 
     public void Combo() 
@@ -114,25 +112,16 @@ public class Gamemanager : MonoBehaviour
 
     public void GameSave()
     {
-        PlayerPrefs.SetInt("ClearScene", activeSceneIndex);
         PlayerPrefs.SetInt("Coin", coin);
+        Debug.Log(coin);
         PlayerPrefs.Save();
     }
 
     public void GameLoad()
     {
-        if (!PlayerPrefs.HasKey("ClearScene")) return;
-        
-        int index = PlayerPrefs.GetInt("ClearScene");
         int money = PlayerPrefs.GetInt("Coin");
         coin = money;
         UImanager.instance.CoinUI(coin);
-        
-        if (index > activeSceneIndex) SceneManager.LoadScene(index + 1);
-        
-
-        
-        
     }
 
 }
