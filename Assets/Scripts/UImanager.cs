@@ -21,7 +21,6 @@ public class UImanager : MonoBehaviour
     public Button pauseButton;
     public GameObject StopPanel;
     Dead dead;
-    Gamemanager gamemanager;
 
     public static UImanager instance
     {
@@ -37,7 +36,6 @@ public class UImanager : MonoBehaviour
     private void Awake() {
         UImanager[] uiManager = FindObjectsOfType<UImanager>();
         dead = GetComponent<Dead>();
-        gamemanager = GetComponent<Gamemanager>();
         if (uiManager.Length == 1)
         {
             DontDestroyOnLoad(gameObject);
@@ -112,13 +110,13 @@ public class UImanager : MonoBehaviour
 
     public void Timer()
     {
-        if(gamemanager.TimeON >= 0.00f)
+        if(Gamemanager.instance.TimeON >= 0.00f)
         {
-            gamemanager.TimeON -= Time.deltaTime;
-            if(gamemanager.TimeON == 0) dead.playerDead();
+            Gamemanager.instance.TimeON -= Time.deltaTime;
+            if(Gamemanager.instance.TimeON == 0) dead.playerDead();
 
         }
-        TimerText.text = string.Format("{0:N2}", gamemanager.TimeON);
+        TimerText.text = string.Format("{0:N2}", Gamemanager.instance.TimeON);
     }
     
 
